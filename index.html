@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>وسيط آي هيرب - نادين عبيدات</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .main-wrapper {
+            display: flex;
+            max-width: 1200px;
+            width: 100%;
+            gap: 20px;
+        }
+        
+        /* العمود الأيسر للصور المتحركة */
+        .products-column {
+            flex: 0 0 280px;
+            background: linear-gradient(135deg, #ff7e5f 0%, #feb47b 100%);
+            border-radius: 20px;
+            padding: 20px;
+            color: white;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            max-height: 90vh;
+            overflow-y: auto;
+            position: sticky;
+            top: 20px;
+        }
+        
+        .products-column h2 {
+            font-size: 22px;
+            margin-bottom: 20px;
+            text-align: center;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .product-item {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            animation: float 3s ease-in-out infinite;
+            transition: transform 0.3s;
+            margin-bottom: 20px;
+        }
+        
+        .product-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .product-item:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+        
+        .product-item:nth-child(3) {
+            animation-delay: 1s;
+        }
+        
+        .product-item:nth-child(4) {
+            animation-delay: 1.5s;
+        }
+        
+        .product-item:nth-child(5) {
+            animation-delay: 2s;
+        }
+        
+        .product-image {
+            width: 120px;
+            height: 120px;
+            object-fit: contain;
+            margin: 0 auto 12px;
+            border-radius: 10px;
+            background: white;
+            padding: 8px;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .product-name {
+            font-size: 14px;
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 8px;
+            height: 40px;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+        
+        .product-price {
+            font-size: 16px;
+            color: #e67e22;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .product-button {
+            display: block;
+            background: linear-gradient(135deg, #ff7e5f 0%, #feb47b 100%);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .product-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* العمود الأيمن للمحتوى الرئيسي */
+        .content-column {
+            flex: 1;
+        }
+        
+        .container {
+            width: 100%;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        header {
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            padding: 25px;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+        
+        .logo {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 32px;
+            background: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #25D366;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        header p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+        
+        .mediator-name {
+            background: rgba(255, 255, 255, 0.2);
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 30px;
+            margin-top: 10px;
+            font-weight: 600;
+            font-size: 20px;
+            backdrop-filter: blur(5px);
+        }
+        
+        .ad-content {
+            padding: 30px;
+        }
+        
+        .service-desc {
+            margin-bottom: 25px;
+            line-height: 1.6;
+            font-size: 18px;
+            text-align: center;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 12px;
+            border-right: 5px solid #25D366;
+        }
+        
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin: 30px 0;
+            gap: 20px;
+        }
+        
+        .feature {
+            width: calc(50% - 10px);
+            text-align: center;
+            padding: 25px 15px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            cursor: pointer;
+        }
+        
+        .feature:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .feature.whatsapp {
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            color: white;
+        }
+        
+        .feature i {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+        
+        .feature h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        
+        .feature p {
+            font-size: 16px;
+            line-height: 1.5;
+        }
+        
+        .contact-box {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 20px 0;
+            text-align: center;
+            border-right: 5px solid #25D366;
+        }
+        
+        .contact-box h2 {
+            color: #128C7E;
+            margin-bottom: 15px;
+            font-size: 24px;
+        }
+        
+        .whatsapp-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 18px;
+            margin-top: 15px;
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .whatsapp-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
+        }
+        
+        .payment-info {
+            background: #fff4e5;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border-right: 5px solid #ff9f43;
+        }
+        
+        .payment-info h3 {
+            color: #e67e22;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        
+        .payment-info ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .payment-info li {
+            margin: 10px 0;
+            padding-right: 20px;
+            position: relative;
+        }
+        
+        .payment-info li:before {
+            content: "•";
+            color: #e67e22;
+            font-weight: bold;
+            position: absolute;
+            right: 0;
+        }
+        
+        /* قسم منتجات آي هيرب */
+        .iherb-products {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            padding: 25px;
+            border-radius: 12px;
+            margin: 30px 0;
+            color: white;
+            text-align: center;
+        }
+        
+        .iherb-products h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        
+        .product-categories {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .product-category {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 15px;
+            border-radius: 10px;
+            width: calc(50% - 10px);
+            backdrop-filter: blur(5px);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .product-category:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-3px);
+        }
+        
+        .product-category i {
+            font-size: 24px;
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        .browse-button {
+            display: inline-block;
+            background: white;
+            color: #2575fc;
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 20px;
+            transition: all 0.3s;
+        }
+        
+        .browse-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* قسم التقييمات */
+        .ratings-section {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 30px 0;
+            border-right: 5px solid #6f42c1;
+        }
+        
+        .ratings-section h2 {
+            color: #6f42c1;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        
+        .rating-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        .form-group label {
+            font-weight: 600;
+            color: #495057;
+        }
+        
+        .form-group input, .form-group textarea {
+            padding: 12px 15px;
+            border: 1px solid #ced4da;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: #6f42c1;
+            box-shadow: 0 0 0 3px rgba(111, 66, 193, 0.1);
+        }
+        
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .stars {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            margin: 10px 0;
+        }
+        
+        .star {
+            font-size: 28px;
+            color: #ddd;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        
+        .star:hover, .star.active {
+            color: #ffc107;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, #6f42c1 0%, #4a1fa4 100%);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(111, 66, 193, 0.3);
+        }
+        
+        .previous-ratings {
+            margin-top: 30px;
+        }
+        
+        .previous-ratings h3 {
+            color: #6f42c1;
+            margin-bottom: 15px;
+            text-align: center;
+            font-size: 20px;
+        }
+        
+        .rating-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+        }
+        
+        .rating-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .rating-name {
+            font-weight: 600;
+            color: #495057;
+        }
+        
+        .rating-stars {
+            color: #ffc107;
+        }
+        
+        .rating-comment {
+            color: #6c757d;
+            line-height: 1.5;
+        }
+        
+        footer {
+            background: #343a40;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 16px;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        @media (max-width: 992px) {
+            .main-wrapper {
+                flex-direction: column;
+            }
+            
+            .products-column {
+                flex: 0 0 auto;
+                max-height: none;
+                position: static;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .features {
+                flex-direction: column;
+            }
+            
+            .feature {
+                width: 100%;
+            }
+            
+            .product-category {
+                width: 100%;
+            }
+            
+            header h1 {
+                font-size: 28px;
+            }
+            
+            .service-desc {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-wrapper">
+        <div class="products-column">
+            <h2>🛍️ الأكثر طلباً من آي هيرب</h2>
+            
+            <div class="product-item">
+                <img src="https://i.ibb.co/0Q7J0q0/vitamin-d3.jpg" class="product-image" alt="فيتامين D3">
+                <div class="product-name">فيتامين D3 5000 IU - Now Foods</div>
+                <div class="product-price">22.50 د.أ</div>
+                <a href="https://jo.iherb.com/pr/Now-Foods-Vitamin-D-3-5000-IU-240-Softgels/13917" class="product-button" target="_blank">تصفح المنتج</a>
+            </div>
+            
+            <div class="product-item">
+                <img src="https://i.ibb.co/6n7B5C3/jojoba-oil.jpg" class="product-image" alt="زيت الجوجوبا">
+                <div class="product-name">زيت الجوجوبا النقي - Cliganic</div>
+                <div class="product-price">18.75 د.أ</div>
+                <a href="https://jo.iherb.com/pr/Cliganic-100-Pure-Jojoba-Oil-4-fl-oz-118-ml/98393" class="product-button" target="_blank">تصفح المنتج</a>
+            </div>
+            
+            <div class="product-item">
+                <img src="https://i.ibb.co/0j7s2y0/collagen.jpg" class="product-image" alt="كولاجين">
+                <div class="product-name">مسحوق الكولاجين - NeoCell</div>
+                <div class="product-price">35.00 د.أ</div>
+                <a href="https://jo.iherb.com/pr/Neocell-Super-Collagen-Powder-7-oz-198-g/16576" class="product-button" target="_blank">تصفح المنتج</a>
+            </div>
+            
+            <div class="product-item">
+                <img src="https://i.ibb.co/6RJf4z0/omega3.jpg" class="product-image" alt="أوميغا-3">
+                <div class="product-name">أوميغا-3 - Nordic Naturals</div>
+                <div class="product-price">27.90 د.أ</div>
+                <a href="https://jo.iherb.com/pr/Nordic-Naturals-Omega-3-Lemon-Flavor-180-Soft-Gels/20770" class="product-button" target="_blank">تصفح المنتج</a>
+            </div>
+            
+            <div class="product-item">
+                <img src="https://i.ibb.co/9q8W4V0/shampoo.jpg" class="product-image" alt="شامبو">
+                <div class="product-name">شامبو Jason Natural</div>
+                <div class="product-price">15.25 د.أ</div>
+                <a href="https://jo.iherb.com/pr/Jason-Natural-Dandruff-Relief-Treatment-Shampoo-8-fl-oz-237-ml/6253" class="product-button" target="_blank">تصفح المنتج</a>
+            </div>
+        </div>
+        
+        <div class="content-column">
+            <div class="container">
+                <header>
+                    <div class="logo">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <h1>وسيط شراء من <span>آي هيرب</span></h1>
+                    <p>لطلب أي منتج ترغب به من متجر آي هيرب العالمي</p>
+                    <div class="mediator-name">نادين عبيدات</div>
+                </header>
+                
+                <div class="ad-content">
+                    <p class="service-desc">
+                        هل ترغب بمنتجات آي هيرب ولكن تحتاج للمساعدة في الطلب؟ 
+                        <br>أنا وسيطتك المختصة لمساعدتك في طلب أي منتج ترغب به من آي هيرب!
+                    </p>
+                    
+                    <div class="iherb-products">
+                        <h2><i class="fas fa-shopping-bag"></i> عرض منتجات آي هيرب الأردن</h2>
+                        <p>تصفح أفضل المنتجات من آي هيرب المتوفرة للتوصيل إلى الأردن</p>
+                        
+                        <div class="product-categories">
+                            <div class="product-category" onclick="openCategory('vitamins')">
+                                <i class="fas fa-capsules"></i>
+                                <h3>الفيتامينات والمكملات</h3>
+                            </div>
+                            <div class="product-category" onclick="openCategory('beauty')">
+                                <i class="fas fa-spa"></i>
+                                <h3>العناية بالبشرة</h3>
+                            </div>
+                            <div class="product-category" onclick="openCategory('nutrition')">
+                                <i class="fas fa-apple-alt"></i>
+                                <h3>التغذية والرياضة</h3>
+                            </div>
+                            <div class="product-category" onclick="openCategory('hair')">
+                                <i class="fas fa-pump-soap"></i>
+                                <h3>العناية بالشعر</h3>
+                            </div>
+                        </div>
+                        
+                        <a href="https://jo.iherb.com/" class="browse-button" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> تصفح كل المنتجات
+                        </a>
+                    </div>
+                    
+                    <div class="features">
+                        <div class="feature whatsapp" onclick="openWhatsApp('أريد طلب منتج من iHerb')">
+                            <i class="fas fa-shopping-cart"></i>
+                            <h3>اطلب بسهولة</h3>
+                            <p>أرسل الرابط أو الصورة عبر الواتساب</p>
+                        </div>
+                        
+                        <div class="feature">
+                            <i class="fas fa-truck"></i>
+                            <h3>توصيل سريع</h3>
+                            <p>التوصيل داخل مدينة اربد: 1 دينار<br>
+                            قرى اربد: 2 دينار</p>
+                        </div>
+                        
+                        <div class="feature whatsapp" onclick="openWhatsApp('أريد الاستفسار عن منتج من iHerb')">
+                            <i class="fas fa-headset"></i>
+                            <h3>دعم متواصل</h3>
+                            <p>متاحة للاستفسارات عبر الواتساب</p>
+                        </div>
+                        
+                        <div class="feature">
+                            <i class="fas fa-shield-alt"></i>
+                            <h3>طلبك آمن</h3>
+                            <p>الدفع عند الاستلام للطلبات أقل من 10 دينار<br>
+                            للطلبات أكثر من 10 دينار: دفع 20% كبدل جدية</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-box">
+                        <h2>كيفية الطلب</h2>
+                        <p>أرسل رابط المنتج أو صورته عبر الواتساب إلى الرقم:</p>
+                        <p style="font-size: 22px; font-weight: bold; margin: 10px 0;">0798807173</p>
+                        <p>سأزودك بالسعر النهائي وتفاصيل الشحن</p>
+                        
+                        <a href="https://wa.me/962798807173?text=أريد طلب منتج من iHerb" class="whatsapp-button">
+                            <i class="fab fa-whatsapp"></i> تواصل عبر الواتساب
+                        </a>
+                    </div>
+                    
+                    <div class="payment-info">
+                        <h3>شروط الدفع والطلب:</h3>
+                        <ul>
+                            <li>الدفع عند الاستلام للطلبات التي تقل عن 10 دينار</li>
+                            <li>للطلبات التي تزيد عن 10 دينار، يطلب دفع 20% من المبلغ كبدل جدية للطلب</li>
+                            <li>أسعار التوصيل: داخل اربد (1 دينار)، قرى اربد (2 دينار)</li>
+                            <li>يتم تأكيد الطلب خلال 24 ساعة</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="ratings-section">
+                        <h2>تقيم الخدمة</h2>
+                        <form class="rating-form" id="ratingForm">
+                            <div class="form-group">
+                                <label for="name">اسمك</label>
+                                <input type="text" id="name" placeholder="ادخل اسمك" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>تقييمك</label>
+                                <div class="stars" id="stars">
+                                    <span class="star" data-value="1">★</span>
+                                    <span class="star" data-value="2">★</span>
+                                    <span class="star" data-value="3">★</span>
+                                    <span class="star" data-value="4">★</span>
+                                    <span class="star" data-value="5">★</span>
+                                </div>
+                                <input type="hidden" id="rating" name="rating" value="0" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="comment">تعليقك (اختياري)</label>
+                                <textarea id="comment" placeholder="اكتب تعليقك عن الخدمة هنا"></textarea>
+                            </div>
+                            
+                            <button type="submit" class="submit-btn">إرسال التقييم</button>
+                        </form>
+                        
+                        <div class="previous-ratings">
+                            <h3>التقييمات السابقة</h3>
+                            <div id="ratingsContainer">
+                                <div class="rating-item">
+                                    <div class="rating-header">
+                                        <span class="rating-name">سارة أحمد</span>
+                                        <span class="rating-stars">★★★★★</span>
+                                    </div>
+                                    <p class="rating-comment">خدمة رائعة وتوصيل سريع، شكراً جزيلاً نادين</p>
+                                </div>
+                                
+                                <div class="rating-item">
+                                    <div class="rating-header">
+                                        <span class="rating-name">محمد خالد</span>
+                                        <span class="rating-stars">★★★★☆</span>
+                                    </div>
+                                    <p class="rating-comment">المنتج وصل بجودة عالية والتوصيل كان في الوقت المحدد</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <footer>
+                    <p>لطلب أي منتج من آي هيرب، لا تتردد في التواصل مع نادين عبيدات</p>
+                    <p>وسيط آي هيرب &copy; 2023</p>
+                </footer>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openWhatsApp(defaultText) {
+            const phoneNumber = "962798807173";
+            const text = encodeURIComponent(defaultText || "أريد الاستفسار عن منتج من iHerb");
+            window.open(`https://wa.me/${phoneNumber}?text=${text}`, '_blank');
+        }
+        
+        // فتح روابط منتجات آي هيرب حسب التصنيف
+        function openCategory(category) {
+            const links = {
+                'vitamins': 'https://jo.iherb.com/c/vitamins',
+                'beauty': 'https://jo.iherb.com/c/beauty',
+                'nutrition': 'https://jo.iherb.com/c/sports-nutrition',
+                'hair': 'https://jo.iherb.com/c/hair-care'
+            };
+            window.open(links[category], '_blank');
+        }
+        
+        // إضافة تأثيرات عند التمرير
+        document.addEventListener('DOMContentLoaded', function() {
+            const features = document.querySelectorAll('.feature');
+            features.forEach(feature => {
+                feature.addEventListener('click', function() {
+                    this.style.transform = 'scale(0.98)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 200);
+                });
+            });
+            
+            // نظام التقييمات
+            const stars = document.querySelectorAll('.star');
+            const ratingInput = document.getElementById('rating');
+            
+            stars.forEach(star => {
+                star.addEventListener('click', function() {
+                    const value = parseInt(this.getAttribute('data-value'));
+                    ratingInput.value = value;
+                    
+                    stars.forEach(s => {
+                        if (parseInt(s.getAttribute('data-value')) <= value) {
+                            s.classList.add('active');
+                        } else {
+                            s.classList.remove('active');
+                        }
+                    });
+                });
+                
+                star.addEventListener('mouseover', function() {
+                    const value = parseInt(this.getAttribute('data-value'));
+                    
+                    stars.forEach(s => {
+                        if (parseInt(s.getAttribute('data-value')) <= value) {
+                            s.style.color = '#ffc107';
+                        } else {
+                            s.style.color = '#ddd';
+                        }
+                    });
+                });
+                
+                star.addEventListener('mouseout', function() {
+                    const currentRating = parseInt(ratingInput.value);
+                    
+                    stars.forEach(s => {
+                        if (parseInt(s.getAttribute('data-value')) <= currentRating) {
+                            s.style.color = '#ffc107';
+                        } else {
+                            s.style.color = '#ddd';
+                        }
+                    });
+                });
+            });
+            
+            // معالجة إرسال التقييم
+            const ratingForm = document.getElementById('ratingForm');
+            const ratingsContainer = document.getElementById('ratingsContainer');
+            
+            ratingForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const name = document.getElementById('name').value;
+                const rating = parseInt(ratingInput.value);
+                const comment = document.getElementById('comment').value;
+                
+                if (rating === 0) {
+                    alert('يرجى اختيار تقييم من 5 نجوم');
+                    return;
+                }
+                
+                // إنشاء عنصر التقييم الجديد
+                const ratingItem = document.createElement('div');
+                ratingItem.className = 'rating-item';
+                
+                let starsHtml = '';
+                for (let i = 1; i <= 5; i++) {
+                    starsHtml += i <= rating ? '★' : '☆';
+                }
+                
+                ratingItem.innerHTML = `
+                    <div class="rating-header">
+                        <span class="rating-name">${name}</span>
+                        <span class="rating-stars">${starsHtml}</span>
+                    </div>
+                    ${comment ? `<p class="rating-comment">${comment}</p>` : ''}
+                `;
+                
+                // إضافة التقييم الجديد في الأعلى
+                ratingsContainer.insertBefore(ratingItem, ratingsContainer.firstChild);
+                
+                // إعادة تعيين النموذج
+                ratingForm.reset();
+                ratingInput.value = 0;
+                stars.forEach(s => s.classList.remove('active'));
+                
+                alert('شكراً لك على تقييمك!');
+            });
+        });
+    </script>
+</body>
+</html>
